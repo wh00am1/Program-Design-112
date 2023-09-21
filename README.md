@@ -1,7 +1,7 @@
 ### configure vpn on linux
 ```console
 sudo apt install openvpn
-openvpn <ccucsie.ovpn>
+openvpn ccucsie.ovpn
 ```
 
 ### compile with debug symbol
