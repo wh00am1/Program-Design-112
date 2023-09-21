@@ -1,9 +1,11 @@
 #include <stdio.h>
 
 int main(){
-	int i=10, j=20;
-	float x=43.2892f, y=5527.0f;
+	int i=20;
+	float x=123.456f, y=5527.0f;
 	printf("%e\n", y);
 	printf("%.3e\n", y);
+	printf("%-5d\n", i);
+	printf("%10.3f\n", x);
 	return 0;
 }
