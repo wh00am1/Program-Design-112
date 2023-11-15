@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define ll __int128
+#define ll long long 
 #define int long long
 ll ans, inp;
 char op;
@@ -26,15 +26,6 @@ ll calc(ll a, char b, ll c){
 	else if(b == '^')
 		return POW(a, c); 
 }
-void print(int x){
-	if(x < 0){
-		putchar('-');
-		x = -x;
-	}
-	if(x>255)
-		print(x/256);
-	printf("%x", x%256);
-}
 signed main() {
     ll ans;
 	int inp, falg=1;
@@ -58,18 +49,16 @@ signed main() {
 		ungetc(c, stdin);
 	scanf("%llx", &inp);
 	inp*=falg;
-	//printf("Ans -> %lld,  Input -> %lld\n", (int)ans, (int)inp);
-	int aans=(int)ans, iinp=(int)inp;
-	if(aans == iinp)
+	if(ans == inp)
 		puts("Correct!");
 	else{
 		falg=-1;
 		puts("BaBaBa, It’s wrong.");
-		if(aans<0)
+		if(ans<0)
 			putchar('-');
 		else
 			falg=1;
-		printf("%llx\n", aans*falg);
+		printf("%llx\n", ans*falg);
 	}
     return 0;
 }
