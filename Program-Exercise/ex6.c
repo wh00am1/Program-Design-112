@@ -1,64 +1,56 @@
 #include <stdio.h>
-#include <stdlib.h>
-#define ll long long 
 #define int long long
-ll ans, inp;
+int ans, inp, flag=1, zf=0;
 char op;
-ll POW(ll base, ll p){
-	ll ret=1;
-	while(p){
-		if(p&1)
-			ret *= base;
-		base *= base;
-		p >>= 1;
+void qp(){
+	int base=ans, res=1;
+	while(inp){
+		if(inp&1)
+			res*=base;
+		base*=base;
+		inp>>=1;
 	}
-	return ret;
+	ans=res;
 }
-ll calc(ll a, char b, ll c){
-	if(b == '+')
-		return a+c;
-	else if(b == '-')
-		return a-c;
-	else if(b == '*')
-		return a*c;
-	else if(b == '/')
-		return a/c;
-	else if(b == '^')
-		return POW(a, c); 
-}
-signed main() {
-    ll ans;
-	int inp, falg=1;
-    char op;
-    scanf("%llx", (int)&ans);
-    while (1) {
-        scanf("%c", &op); 
-        if (op == '=') break;
-        scanf("%llx", (int)&inp);
-        if (op == '/' && inp == 0) {
-            printf("You can't divide with zero!\n");
-            return 0;
-        }
-        ans = calc(ans, op, inp);
-    }
-	signed c;
-	c=getc(stdin);
-	if(c == '-')
-		falg=-1;
-	else
-		ungetc(c, stdin);
-	scanf("%llx", &inp);
-	inp*=falg;
-	if(ans == inp)
-		puts("Correct!");
-	else{
-		falg=-1;
-		puts("BaBaBa, It’s wrong.");
-		if(ans<0)
-			putchar('-');
-		else
-			falg=1;
-		printf("%llx\n", ans*falg);
+void calc(){
+	if(op=='+')
+		ans+=inp;
+	if(op=='-')
+		ans-=inp;
+	if(op=='*')
+		ans*=inp;
+	if(op=='/'){
+		if(inp==0){
+			zf=1;
+			inp=1;
+		}
+		ans/=inp;
 	}
-    return 0;
+	if(op=='^')
+		qp();
+}
+signed main(){
+	scanf("%llx", &ans);
+	while(scanf("%c", &op)!=EOF){
+		if(op=='='){
+			scanf("%llx", &inp);
+			if(zf)
+				puts("You can't divide with zero!");
+			else if(inp==ans)
+				puts("Correct!");
+			else{
+				puts("BaBaBa, It's wrong.");
+				if(ans<0){
+					printf("-");
+					ans=-ans;
+				}
+				printf("%llx\n", ans);
+			}
+		}
+		else{
+			scanf("%llx", &inp);
+			calc();
+		}
+	}
+	return 0;
 }
